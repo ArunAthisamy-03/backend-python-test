@@ -1,14 +1,25 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="col-md-4 col-md-offset-4">
+<div>
     <h1>Todo:</h1>
     <table class="table table-striped">
-        <th>#</th><th>User</th><th>Description</th><th></th>
+        <th>#</th><th>User</th><th>Description</th><th>Completed</th><th></th>
         <tr>
             <td>{{ todo.id }}</td>
             <td>{{ todo.user_id }}</td>
             <td>{{ todo.description }}</td>
+            <td>
+                {% if todo.is_completed == 'True' %}
+                    <div class="checkbox">
+                        <input type="checkbox" class="todochk" name="todochk" id="{{ todo.id }}" checked>
+                    </div>
+                    {% else %}
+                    <div class="checkbox">
+                        <input type="checkbox" class="todochk" name="todochk" id="{{ todo.id }}">
+                    </div>
+                    {% endif %}
+            </td>
             <td>
                 <form method="post" action="{{ url_for('todo_delete', id=todo.id) }}">
                     <button type="submit" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-remove glyphicon-white"></span></button>
@@ -17,5 +28,13 @@
         </tr>
     </table>
 </div>
+<script>
 
+    // Register an event that should be fired when the checkbox value is changed
+    $('.todochk').change(function() {
+        var data = { isChecked : $(this).is(':checked'), id:  $(this)[0].id};
+        $.post('/todochk', data);
+    });
+
+</script>
 {% endblock %}
