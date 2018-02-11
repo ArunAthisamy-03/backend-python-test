@@ -88,3 +88,11 @@ More documentation on Github:
 * https://help.github.com/articles/fork-a-repo/
 * https://help.github.com/articles/using-pull-requests/
 
+To run test cases:
+* python alayatodotest.py
+
+To run code coverage:
+* coverage run alayatodotest.py
+* coverage report
+* check for views.py and service.py reports in coverage report
+
