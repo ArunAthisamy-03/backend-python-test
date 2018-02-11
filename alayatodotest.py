@@ -1,3 +1,6 @@
+"""
+Test cases for view and its services
+"""
 import unittest
 from alayatodo import app
 
@@ -58,11 +61,27 @@ class TestViews(unittest.TestCase):
         self.assertEqual(response._status_code, 200)
 
 
+    def test_todo_Get_Invalid(self):
+        """
+        Test method to test todo get method with Invlaid id.
+        """
+        response = self.app.get('/todo/Invalid',follow_redirects=True)
+        self.assertEqual(response._status_code, 200)
+
+
     def test_todojson_Get(self):
         """
         Test method to test todojson method.
         """
         response = self.app.get('/todo/1/json',follow_redirects=True)
+        self.assertEqual(response._status_code, 200)
+
+
+    def test_todojson_Get_Invalid(self):
+        """
+        Test method to test todojson method with Invalid id.
+        """
+        response = self.app.get('/todo/Invalid/json',follow_redirects=True)
         self.assertEqual(response._status_code, 200)
 
 
@@ -88,6 +107,7 @@ class TestViews(unittest.TestCase):
         response = self.app.post('/todo/',data = dict(description="mock data"), follow_redirects=True)
         self.assertEqual(response._status_code, 200)
 
+
     def test_tododelete_Post(self):
         """
         Test method to test todo_delete post method.
@@ -99,6 +119,7 @@ class TestViews(unittest.TestCase):
         response = self.app.post('/todo/1',follow_redirects=True)
         self.assertEqual(response._status_code, 200)
 
+
     def test_todochk_Post(self):
         """
         Test method to test todochk post method.
@@ -109,6 +130,7 @@ class TestViews(unittest.TestCase):
                 sess['user'] = 1
         response = self.app.post('/todochk',data = dict(isChecked= 'true'),follow_redirects=True)
         self.assertEqual(response._status_code, 200)
+
 
     def test_error(self):
         """
