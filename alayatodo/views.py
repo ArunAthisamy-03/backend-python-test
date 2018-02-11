@@ -1,9 +1,8 @@
 """views.py holds the business logic of alayatodo app"""
 
-from alayatodo import app,db,logger
+from alayatodo import app,logger
 from services import DBService
 from flask import (
-    g,
     redirect,
     render_template,
     request,
